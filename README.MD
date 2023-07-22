@@ -15,6 +15,11 @@
  * testserver - krpano测试服务器。
  * register -License注册工具。
 
+#### 安装
+```shell
+composer require pl1998/php-krpano
+```
+
 #### `makepano 命令更具全景图片生成全景图`
 ```php
 <?php
