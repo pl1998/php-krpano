@@ -1,0 +1,17 @@
+{
+    "name": "panliang/php-krpano",
+    "description": "This is a PHP Krpano name command line package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Panliang\\PhpKrpano\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "latent",
+            "email": "panliang@mythinkcar.com"
+        }
+    ],
+    "require": {}
+}
