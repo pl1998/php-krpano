@@ -20,7 +20,7 @@
 composer require pl1998/php-krpano
 ```
 
-#### `makepano 命令更具全景图片生成全景图`
+#### `makepano`命令 全景图片生成全景图
 ```php
 <?php
 require "vendor/autoload.php";
