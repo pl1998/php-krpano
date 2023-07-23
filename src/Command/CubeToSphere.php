@@ -9,28 +9,28 @@ use Panliang\PhpKrpano\Exception\KrpanoException;
 class CubeToSphere extends KrpanoTools implements KrpanoToolsInterface
 {
     /** @var string six img */
-    protected $sixImageCmd ;
+    protected ?string  $sixImageCmd = null;
 
     /** @var string  */
-    protected $baseCmd = CmdEnum::CUBE_TO_SPHERE;
+    protected ?string $baseCmd = CmdEnum::CUBE_TO_SPHERE;
 
     /** @var int  Picture quality*/
-    protected $jpegQuality;
+    protected ?int $jpegQuality = null;
 
     /** @var int Picture color sampling */
-    protected $jpegSubSamp;
+    protected ?int $jpegSubSamp = null;
 
     /** @var bool Picture compression or not */
-    protected $jpegOptimize = false;
+    protected bool $jpegOptimize = false;
 
     /** @var string Set the TIFF compression method to none, lzw, zip or jpeg, default=lzw */
-    protected $tiffCompress;
+    protected ?string $tiffCompress = null;
 
     /** @var string Custom directory for temporary files. */
-    protected $tempDir;
+    protected ?string $tempDir = null;
 
     /** @var bool  work fast */
-    protected $isFast = false;
+    protected bool $isFast = false;
 
     /**
      * Set 6 faces
@@ -57,7 +57,7 @@ Alternatively it would be possible specify the filesnames for the cubesides manu
      * @param bool $fast
      * @return $this
      */
-    public function fast(bool $fast)
+    public function fast(bool $fast) :CubeToSphere
     {
         $this->isFast = $fast;
         return $this;
@@ -94,7 +94,7 @@ Alternatively it would be possible specify the filesnames for the cubesides manu
      * @param bool $bool
      * @return $this
      */
-    public function setJpegOptimize(bool $bool = true)
+    public function setJpegOptimize(bool $bool = true) :CubeToSphere
     {
         $this->jpegOptimize = $bool;
         return $this;
@@ -104,7 +104,7 @@ Alternatively it would be possible specify the filesnames for the cubesides manu
      * Set the TIFF compression method, none, lzw, zip or jpeg, default=lzw.
      * @return $this
      */
-    public function setTiffCompress(string $str = 'lzw')
+    public function setTiffCompress(string $str = 'lzw') :CubeToSphere
     {
         $this->tiffCompress = $str;
         return $this;
@@ -115,7 +115,7 @@ Alternatively it would be possible specify the filesnames for the cubesides manu
      * @param string $str
      * @return $this
      */
-    public function setTempDir(string $str)
+    public function setTempDir(string $str) :CubeToSphere
     {
         $this->tempDir = $str;
         return $this;

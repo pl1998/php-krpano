@@ -15,28 +15,28 @@ use Panliang\PhpKrpano\Exception\KrpanoException;
 class MakePano extends KrpanoTools implements KrpanoToolsInterface
 {
     /** @var string */
-    protected $config;
+    protected ?string $config = null;
 
     /** @var string */
-    protected $tilePath;
+    protected ?string $tilePath= null;
 
     /** @var string */
-    protected $thumbPath;
+    protected ?string $thumbPath= null;
 
     /** @var string */
-    protected $xmlPath;
+    protected ?string $xmlPath= null;
 
     /** @var string */
-    protected $previewPath;
+    protected ?string $previewPath= null;
 
     /** @var string */
-    protected $tempCubePath;
+    protected ?string $tempCubePath= null;
 
     /** @var int */
-    protected $thumbSize;
+    protected ?int $thumbSize;
 
     /** @var string */
-    protected $imgPath;
+    protected ?string  $imgPath;
 
     /**
      * @param string $config

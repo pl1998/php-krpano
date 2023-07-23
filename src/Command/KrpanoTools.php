@@ -11,13 +11,13 @@ namespace Panliang\PhpKrpano\Command;
 abstract class KrpanoTools
 {
     /** @var string output file path */
-    public $output;
+    public ?string $output = null;
 
     /** @var string file size  */
-    public $size;
+    public ?string $size = null;
 
     /** @var bool quit */
-    public $isQuit = false;
+    public bool $isQuit = false;
 
     public function setOutput(string $output)
     {
@@ -40,7 +40,7 @@ abstract class KrpanoTools
      * @param string $size
      * @return $this
      */
-    public function setSize(string $size): CubeToSphere
+    public function setSize(string $size)
     {
         $this->size = $size;
         return $this;
