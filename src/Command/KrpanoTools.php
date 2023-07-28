@@ -1,10 +1,5 @@
 <?php
-/**
- * Created By PhpStorm.
- * User : Latent
- * Date : 2023/7/22
- * Time : 10:07
- **/
+declare(strict_types=1);
 
 namespace Panliang\PhpKrpano\Command;
 

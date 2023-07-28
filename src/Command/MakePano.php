@@ -1,17 +1,15 @@
 <?php
 declare(strict_types=1);
-/**
- * Created By PhpStorm.
- * User : Latent
- * Date : 2023/7/22
- * Time : 12:42
- **/
 
 namespace Panliang\PhpKrpano\Command;
 
 use Panliang\PhpKrpano\Enum\CmdEnum;
 use Panliang\PhpKrpano\Exception\KrpanoException;
 
+
+/**
+ * docs https://krpano.com/docu/tools/#makepano
+ */
 class MakePano extends KrpanoTools implements KrpanoToolsInterface
 {
     /** @var string */

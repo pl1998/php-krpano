@@ -6,31 +6,18 @@ namespace Panliang\PhpKrpano\Command;
 use Panliang\PhpKrpano\Enum\CmdEnum;
 use Panliang\PhpKrpano\Exception\KrpanoException;
 
+/**
+ * docs https://krpano.com/docu/tools/#cubetosphere
+ */
 class CubeToSphere extends KrpanoTools implements KrpanoToolsInterface
 {
+    use CubeAndSphereInput;
+
     /** @var string six img */
     protected $sixImageCmd ;
 
     /** @var string  */
     protected $baseCmd = CmdEnum::CUBE_TO_SPHERE;
-
-    /** @var int  Picture quality*/
-    protected $jpegQuality;
-
-    /** @var int Picture color sampling */
-    protected $jpegSubSamp;
-
-    /** @var bool Picture compression or not */
-    protected $jpegOptimize = false;
-
-    /** @var string Set the TIFF compression method to none, lzw, zip or jpeg, default=lzw */
-    protected $tiffCompress;
-
-    /** @var string Custom directory for temporary files. */
-    protected $tempDir;
-
-    /** @var bool  work fast */
-    protected $isFast = false;
 
     /**
      * Set 6 faces
@@ -49,86 +36,6 @@ Alternatively it would be possible specify the filesnames for the cubesides manu
         foreach ($keys as $v) {
             $this->sixImageCmd .= " -$v=$list[$v]";
         }
-        return $this;
-    }
-
-    /**
-     * Faster but lower-quality processing.
-     * @param bool $fast
-     * @return $this
-     */
-    public function fast(bool $fast)
-    {
-        $this->isFast = $fast;
-        return $this;
-    }
-
-    /**
-     * Set picture quality
-     * @param int $num
-     * @return $this
-     */
-    public function setJpegQuality(int $num): CubeToSphere
-    {
-        if(0<$num && $num<=100) {
-            $this->jpegQuality = $num;
-        }
-        return $this;
-    }
-
-    /**
-     *Set image color sampling
-     * @param int $samp
-     * @return $this
-     */
-    public function setJpegSubSamp(int $samp = 444): CubeToSphere
-    {
-        if(in_array($samp,[444, 420, 420, 41])) {
-            $this->jpegSubSamp = $samp;
-        }
-        return $this;
-    }
-
-    /**
-     * The huffman algorithm is used to compress images
-     * @param bool $bool
-     * @return $this
-     */
-    public function setJpegOptimize(bool $bool = true)
-    {
-        $this->jpegOptimize = $bool;
-        return $this;
-    }
-
-    /**
-     * Set the TIFF compression method, none, lzw, zip or jpeg, default=lzw.
-     * @return $this
-     */
-    public function setTiffCompress(string $str = 'lzw')
-    {
-        $this->tiffCompress = $str;
-        return $this;
-    }
-
-    /**
-     * Set a custom directory for temporary files.
-     * @param string $str
-     * @return $this
-     */
-    public function setTempDir(string $str)
-    {
-        $this->tempDir = $str;
-        return $this;
-    }
-
-    /**
-     * Quiet mode, no console output.
-     * @param bool $bool
-     * @return $this
-     */
-    public function quit(bool $bool = true): CubeToSphere
-    {
-        $this->isQuit = $bool;
         return $this;
     }
 

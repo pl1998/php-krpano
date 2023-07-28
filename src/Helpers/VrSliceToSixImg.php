@@ -1,11 +1,5 @@
 <?php
 declare(strict_types=1);
-/**
- * Created By PhpStorm.
- * User : Latent
- * Date : 2023/7/22
- * Time : 11:28
- **/
 
 namespace Panliang\PhpKrpano\Helpers;
 

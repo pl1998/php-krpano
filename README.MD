@@ -8,7 +8,7 @@
  * maketiles - 制作或合并平铺图像。也可用于转换和调整大小。
  * convert - 转换或调整图像大小。
  * makepreview - 制作平滑的全景预览图像。
- * spheretocube - 将球面图像转换为立方体全景图像。
+ * [spheretocube](/tests/sphere_to_cube_test.php) - 将球面图像转换为立方体全景图像。
  * [cubetosphere](/tests/cubetosphere_test.php) - 将立方体图像转换为球形全景图像。
  * protect - 创建具有自定义保护设置的查看器文件。
  * encrypt - 加密文件。
