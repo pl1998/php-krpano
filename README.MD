@@ -17,7 +17,7 @@
 
 #### 安装
 ```shell
-composer require panliang/php-krpano
+composer require panliang/php-krpano dev-master
 ```
 
 #### `makepano`命令 全景图片生成全景图
