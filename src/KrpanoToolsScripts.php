@@ -8,7 +8,7 @@ use Panliang\PhpKrpano\Exception\KrpanoException;
 class KrpanoToolsScripts
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected ?string $baseCmd = null;
 
@@ -42,7 +42,7 @@ class KrpanoToolsScripts
         if(!$this->cmd) {
             throw new KrpanoException('cmd value not set');
         }
-        return "{$this->baseCmd} {$this->cmd}";
+        return "$this->baseCmd $this->cmd";
     }
 
 

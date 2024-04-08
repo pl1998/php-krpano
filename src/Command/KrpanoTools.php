@@ -10,16 +10,20 @@ namespace Panliang\PhpKrpano\Command;
 
 abstract class KrpanoTools
 {
-    /** @var string output file path */
+    /** @var string|null output file path */
     public ?string $output = null;
 
-    /** @var string file size  */
+    /** @var string|null  file size  */
     public ?string $size = null;
 
     /** @var bool quit */
     public bool $isQuit = false;
 
-    public function setOutput(string $output)
+    /**
+     * @param string $output
+     * @return $this
+     */
+    public function setOutput(string $output): static
     {
         $this->output = $output;
         return $this;
@@ -29,7 +33,7 @@ abstract class KrpanoTools
      * @param bool $quit
      * @return $this
      */
-    public function setQuit(bool $quit = true)
+    public function setQuit(bool $quit = true): static
     {
         $this->isQuit = $quit;
         return $this;
@@ -40,7 +44,7 @@ abstract class KrpanoTools
      * @param string $size
      * @return $this
      */
-    public function setSize(string $size)
+    public function setSize(string $size): static
     {
         $this->size = $size;
         return $this;

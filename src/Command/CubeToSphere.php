@@ -8,25 +8,25 @@ use Panliang\PhpKrpano\Exception\KrpanoException;
 
 class CubeToSphere extends KrpanoTools implements KrpanoToolsInterface
 {
-    /** @var string six img */
+    /** @var string|null six img */
     protected ?string  $sixImageCmd = null;
 
-    /** @var string  */
+    /** @var string|null  */
     protected ?string $baseCmd = CmdEnum::CUBE_TO_SPHERE;
 
-    /** @var int  Picture quality*/
+    /** @var int|null  Picture quality*/
     protected ?int $jpegQuality = null;
 
-    /** @var int Picture color sampling */
+    /** @var int|null Picture color sampling */
     protected ?int $jpegSubSamp = null;
 
     /** @var bool Picture compression or not */
     protected bool $jpegOptimize = false;
 
-    /** @var string Set the TIFF compression method to none, lzw, zip or jpeg, default=lzw */
+    /** @var string|null Set the TIFF compression method to none, lzw, zip or jpeg, default=lzw */
     protected ?string $tiffCompress = null;
 
-    /** @var string Custom directory for temporary files. */
+    /** @var string|null Custom directory for temporary files. */
     protected ?string $tempDir = null;
 
     /** @var bool  work fast */

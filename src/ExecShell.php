@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace Panliang\PhpKrpano;
+use Throwable;
 class ExecShell
 {
     /**
@@ -10,7 +11,7 @@ class ExecShell
     protected KrpanoToolsScripts  $scripts;
 
     /**
-     * @var string|array message
+     * @var string|array|null message
      */
     protected string|null|array $message = null;
 
@@ -39,14 +40,14 @@ class ExecShell
             }else{
                 $this->message =  shell_exec($this->scripts->echo());
             }
-        }catch (\Throwable $exception) {
+        }catch (Throwable $exception) {
             $this->message =  $exception->getMessage();
         }
         return $this;
     }
 
     /**
-     * @return array|string
+     * @return array|string|null
      */
     public function echo() :array|null|string
     {
