@@ -14,11 +14,12 @@ class VrSliceToSixImg
 
     /**
      * 根据切片算法合成6位面小图
-     * @param string $path 路径
-     * @param int $level 层级
+     * According to slicing algorithm, the 6-bit surface map is synthesized
+     * @param string $path
+     * @param int $level
      * @return array
      */
-    public function getSixImage(string $path , int $level = 1): array
+    public function getSixImage(string $path, int $level = 1) :array
     {
         $surface = array('l', 'r', 'u', 'b', 'f', 'd');
         $sixImage = [];
@@ -28,10 +29,12 @@ class VrSliceToSixImg
                 $sixImage[$v] = $outputImagePath;
                 continue;
             }
+
             $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 1, 1);
             $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 1, 2);
             $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 2, 1);
             $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 2, 2);
+
             // 根据拼接逻辑
             // 1-1 1-2
             // 2-1 2-2

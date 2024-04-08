@@ -33,14 +33,17 @@ class ExecShell
             return $this;
         }
         try {
-            if(extension_loaded("swoole") && version_compare(phpversion("swoole"),'4.4.6','>=')) {
-                 \Swoole\Coroutine\run(function() {
+
+            if(extension_loaded("swoole") && version_compare(phpversion("swoole"),"4.4.6",">=")) {
+                //swoole v4.4.6 后可用
+                \Swoole\Coroutine\run(function() {
                     $this->message =  \Swoole\Coroutine\System::exec($this->scripts->echo());
                 });
             }else{
                 $this->message =  shell_exec($this->scripts->echo());
             }
         }catch (Throwable $exception) {
+
             $this->message =  $exception->getMessage();
         }
         return $this;
