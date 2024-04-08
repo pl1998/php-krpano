@@ -13,5 +13,7 @@ class CmdEnum
 {
     /** @var string  */
     public const CUBE_TO_SPHERE = "cubetosphere";
+
+    /** @var string  */
     public const MAKE_PANO = "makepano";
 }

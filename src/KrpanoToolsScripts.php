@@ -8,32 +8,41 @@ use Panliang\PhpKrpano\Exception\KrpanoException;
 class KrpanoToolsScripts
 {
     /**
-     * @var string cmd命令
+     * @var string|null
      */
-    protected $baseCmd;
+    protected ?string $baseCmd = null;
 
     /**
-     * @var string cmd命令
+     * @var string
      */
-    protected $cmd;
+    protected string $cmd;
 
     public function __construct(string $baseCmd)
     {
         $this->baseCmd = $baseCmd;
     }
 
-    public function setCmd(KrpanoToolsInterface $cmd)
+    /**
+     * set cmd
+     * @param KrpanoToolsInterface $cmd
+     * @return $this
+     */
+    public function setCmd(KrpanoToolsInterface $cmd) :KrpanoToolsScripts
     {
         $this->cmd = $cmd->export();
         return $this;
     }
 
-    public function echo()
+    /**
+     * @return string
+     * @throws KrpanoException
+     */
+    public function echo() :string
     {
         if(!$this->cmd) {
             throw new KrpanoException('cmd value not set');
         }
-        return "{$this->baseCmd} {$this->cmd}";
+        return "$this->baseCmd $this->cmd";
     }
 
 

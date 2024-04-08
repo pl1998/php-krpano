@@ -14,29 +14,37 @@ use Panliang\PhpKrpano\Exception\KrpanoException;
 
 class MakePano extends KrpanoTools implements KrpanoToolsInterface
 {
-    /** @var string */
-    protected $config;
+    /** @var string|null */
+    protected ?string $config = null;
 
-    /** @var string */
-    protected $tilePath;
+    /** @var string|null */
+    protected ?string $tilePath= null;
 
-    /** @var string */
-    protected $thumbPath;
+    /** @var string|null */
+    protected ?string $thumbPath= null;
 
-    /** @var string */
-    protected $xmlPath;
+    /** @var string|null */
+    protected ?string $xmlPath= null;
 
-    /** @var string */
-    protected $previewPath;
+    /** @var string|null */
+    protected ?string $previewPath= null;
 
-    /** @var string */
-    protected $tempCubePath;
+    /** @var string|null */
+    protected ?string $tempCubePath= null;
 
-    /** @var int */
-    protected $thumbSize;
+    /** @var int|null */
+    protected ?int $thumbSize = null;
 
-    /** @var string */
-    protected $imgPath;
+    /** @var string|null */
+    protected ?string  $imgPath = null;
+
+    /** @var string|null */
+    protected ?string  $levels = null;
+
+    /**
+     * @var string|null
+     */
+    protected ?string  $maxsize = null;
 
     /**
      * @param string $config
@@ -45,6 +53,27 @@ class MakePano extends KrpanoTools implements KrpanoToolsInterface
     public function setConfig(string $config): MakePano
     {
         $this->config = $config;
+        return $this;
+    }
+
+    /**
+     * @param string|null $size
+     * @return $this
+     */
+    public function setMaxSize(string|null $size): MakePano
+    {
+        $this->maxsize = $size;
+        return $this;
+    }
+
+
+    /**
+     * @param string $levels
+     * @return $this
+     */
+    public function setLevels(string $levels): MakePano
+    {
+        $this->levels = $levels;
         return $this;
     }
 
@@ -122,42 +151,26 @@ class MakePano extends KrpanoTools implements KrpanoToolsInterface
         return $this;
     }
 
+
     /**
      * @return string
      * @throws KrpanoException
      */
     public function export() :string
     {
-        if(!$this->config) {
-            throw new KrpanoException("Please select Config- position:/templates/*.config");
-        }
-        if(!$this->imgPath) {
-            throw new KrpanoException("Please select Image Path");
-        }
-        $cmd = CmdEnum::MAKE_PANO."  -config={$this->config}";
-        if($this->tilePath) {
-            $cmd .=" -tilepath={$this->tilePath}";
-        }
-        if($this->thumbPath) {
-            $cmd .=" -thumbpath={$this->thumbPath}";
-        }
-        if($this->thumbSize) {
-            $cmd .=" -thumbsize={$this->thumbSize}";
-        }
-        if($this->xmlPath) {
-            $cmd .=" -xmlpath={$this->xmlPath}";
-        }
-        if($this->previewPath) {
-            $cmd .=" -previewpath={$this->previewPath}";
-        }
-        $cmd .=" {$this->imgPath}";
-        if($this->tempCubePath) {
-            $cmd .=" -tempcubepath={$this->tempCubePath}";
-        }
-
-        if($this->output) {
-            $cmd .=" -outputpath={$this->output}";
-        }
+        if(!$this->config)    throw new KrpanoException("Please select Config- position:/templates/*.config");
+        if(!$this->imgPath)   throw new KrpanoException("Please select Image Path");
+        $cmd = CmdEnum::MAKE_PANO."  -config=$this->config";
+        if($this->tilePath)        $cmd .=" -tilepath=$this->tilePath";
+        if($this->thumbPath)       $cmd .=" -thumbpath=$this->thumbPath";
+        if($this->thumbSize)       $cmd .=" -thumbsize=$this->thumbSize";
+        if($this->xmlPath)         $cmd .=" -xmlpath=$this->xmlPath";
+        if($this->previewPath)     $cmd .=" -previewpath=$this->previewPath";
+        if($this->levels)          $cmd .=" -levels=$this->levels";
+        if($this->maxsize)         $cmd .=" -maxsize=$this->maxsize";
+        $cmd .=" $this->imgPath";
+        if($this->tempCubePath)    $cmd .=" -tempcubepath=$this->tempCubePath";
+        if($this->output)          $cmd .=" -outputpath=$this->output";
         return $cmd;
     }
 }

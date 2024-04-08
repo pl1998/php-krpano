@@ -34,6 +34,8 @@ $cmd = (new \Panliang\PhpKrpano\Command\MakePano())
     ->setTilePath("{$filePath}/vtour/list/l%Al[_c]_%Av_%Ah.jpg") //设置切片规则
 //    ->setThumbPath("{$filePath}/thumb.jpg") //设置主题图生成路径
 //    ->setXmlPath("{$filePath}/tour.xml") // 设置xml文件生成路径
+    ->setLevels('3') //瓦片图层数 1 2 3 层数越高 显示越清晰 默认为auto
+    ->setMaxSize('512') // 设置切片最大质量 128 512 1024
     ->setPreviewPath("{$filePath}/vtour/list/preview.jpg") //设置预览图生成路径
     ->setTempCubePath("{$filePath}/tempcubepath")
     ->setThumbSize(430) // 设置主题图尺寸

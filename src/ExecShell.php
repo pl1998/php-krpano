@@ -2,17 +2,18 @@
 declare(strict_types=1);
 
 namespace Panliang\PhpKrpano;
+use Throwable;
 class ExecShell
 {
     /**
      * @var KrpanoToolsScripts
      */
-    protected  $scripts;
+    protected KrpanoToolsScripts  $scripts;
 
     /**
-     * @var string|array message
+     * @var string|array|null message
      */
-    protected $message;
+    protected string|null|array $message = null;
 
     public function __construct(KrpanoToolsScripts $scripts)
     {
@@ -24,13 +25,15 @@ class ExecShell
      * exec shell cmd
      * @return $this
      */
-    public function exec(callable $callback = null)
+    public function exec(callable $callback = null) :ExecShell
     {
+        //Supports custom output
         if($callback) {
             call_user_func($callback);
             return $this;
         }
         try {
+
             if(extension_loaded("swoole") && version_compare(phpversion("swoole"),"4.4.6",">=")) {
                 //swoole v4.4.6 后可用
                 \Swoole\Coroutine\run(function() {
@@ -39,16 +42,17 @@ class ExecShell
             }else{
                 $this->message =  shell_exec($this->scripts->echo());
             }
-        }catch (\Throwable $exception) {
+        }catch (Throwable $exception) {
+
             $this->message =  $exception->getMessage();
         }
         return $this;
     }
 
     /**
-     * @return array|string
+     * @return array|string|null
      */
-    public function echo()
+    public function echo() :array|null|string
     {
         return $this->message;
     }

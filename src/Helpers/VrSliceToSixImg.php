@@ -13,6 +13,7 @@ class VrSliceToSixImg
 {
 
     /**
+     * 根据切片算法合成6位面小图
      * According to slicing algorithm, the 6-bit surface map is synthesized
      * @param string $path
      * @param int $level
@@ -20,36 +21,38 @@ class VrSliceToSixImg
      */
     public function getSixImage(string $path, int $level = 1) :array
     {
-        $surface  = array('l', 'r', 'u', 'b', 'f', 'd');
+        $surface = array('l', 'r', 'u', 'b', 'f', 'd');
         $sixImage = [];
         foreach ($surface as $v) {
-            $outputImagePath = $path.$v.'.jpg';
-            if(file_exists($outputImagePath)) {
+            $outputImagePath = $path . $v . '.jpg';
+            if (file_exists($outputImagePath)) {
                 $sixImage[$v] = $outputImagePath;
                 continue;
             }
-            $list_slice[$v][]=sprintf($path."l{$level}_%s_%s_%s.jpg",$v,1,1);
-            $list_slice[$v][]=sprintf($path."l{$level}_%s_%s_%s.jpg",$v,1,2);
-            $list_slice[$v][]=sprintf($path."l{$level}_%s_%s_%s.jpg",$v,2,1);
-            $list_slice[$v][]=sprintf($path."l{$level}_%s_%s_%s.jpg",$v,2,2);
+
+            $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 1, 1);
+            $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 1, 2);
+            $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 2, 1);
+            $list_slice[$v][] = sprintf($path . "l{$level}_%s_%s_%s.jpg", $v, 2, 2);
+
             // 根据拼接逻辑
             // 1-1 1-2
             // 2-1 2-2
             // 计算图片长 宽
-            [$w0,$h0] = getimagesize($list_slice[$v][0]);
-            [$w1,$h1] = getimagesize($list_slice[$v][1]);
-            [$w2,$h2] = getimagesize($list_slice[$v][2]);
-            $imageWidth = $w0+$w1;
-            $imageHeight = $h0+$h2;
-            $canvas = imagecreatetruecolor($imageWidth,$imageHeight);
+            [$w0, $h0] = getimagesize($list_slice[$v][0]);
+            [$w1, $h1] = getimagesize($list_slice[$v][1]);
+            [$w2, $h2] = getimagesize($list_slice[$v][2]);
+            $imageWidth = $w0 + $w1;
+            $imageHeight = $h0 + $h2;
+            $canvas = imagecreatetruecolor($imageWidth, $imageHeight);
             $backgroundColor = imagecolorallocate($canvas, 255, 255, 255);
             imagefill($canvas, 0, 0, $backgroundColor);
 
-            $imagePositions= [
+            $imagePositions = [
                 [0, 0],  // 图片1的位置
                 [$w0, 0],  // 图片2的位置
                 [0, $w0],  // 图片3的位置
-                [$h1,$w2],  // 图片4的位置
+                [$h1, $w2],  // 图片4的位置
             ];
             $imagePaths = $list_slice[$v];
             foreach ($imagePaths as $index => $imagePath) {
